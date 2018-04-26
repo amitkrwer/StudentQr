@@ -4,10 +4,10 @@
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
     <!-- Strings related to login -->
-    <string name="prompt_email">MAV Email</string>
+    <string name="prompt_email">Email</string>
     <string name="prompt_password">Password</string>
 
-    <string name="enter_email">Enter MAV Email!</string>
+    <string name="enter_email">Enter Email!</string>
     <string name="enter_password">Enter Password!</string>
 
     <string name="action_sign_in">Sign in</string>
@@ -29,7 +29,7 @@
     <string name="header_mav_sign_up">Registration</string>
     <string name="prompt_first_name">First Name</string>
     <string name="prompt_last_name">Last Name</string>
-    <string name="prompt_mav_email">Mav Email</string>
+    <string name="prompt_mav_email">Email</string>
     <string name="prompt_device_id">Android Device Id</string>
     <string name="prompt_confirm_password">Confirm Password</string>
     <string name="btn_mav_sign_up_text">Sign Up</string>

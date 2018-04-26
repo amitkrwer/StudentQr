@@ -36,8 +36,8 @@ import java.util.Map;
 
 public class ViewTopics extends ActionBarActivity {
 
-    String URL2 = "http://192.168.0.13:9999/AMSService/GetTopics/";
-    String URL = "http://192.168.0.13:9999/AMSService/GetStudentEnrolled/";
+    String URL2 = "http://qrapp-qrattendfirst.7e14.starter-us-west-2.openshiftapps.com/AMSWebServices/AMSService/GetTopics/";
+    String URL = "http://qrapp-qrattendfirst.7e14.starter-us-west-2.openshiftapps.com/AMSWebServices/AMSService/GetStudentEnrolled/";
     String TAG = "DMS";
     User user;
     String userXML;

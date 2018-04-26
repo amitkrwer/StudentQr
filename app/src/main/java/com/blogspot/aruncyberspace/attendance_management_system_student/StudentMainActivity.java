@@ -79,7 +79,6 @@ public class StudentMainActivity extends ActionBarActivity {
                 Intent intent = new Intent(getApplicationContext(), QRCodeGenerateActivity.class);
                 intent.putExtra("USER_XML",userXML);
                 intent.putExtra("course_id",currentCourse.getCourseId());
-
                 startActivity(intent);
             }
         });
@@ -91,10 +90,7 @@ public class StudentMainActivity extends ActionBarActivity {
         User user = new User();
         Serializer serializer = new Persister();
         try {
-
             user = serializer.read(User.class, userXML);
-
-
         } catch (Exception ex) {
             String exceptionstring = ex.toString();
             exceptionstring.toString();
@@ -201,7 +197,7 @@ public class StudentMainActivity extends ActionBarActivity {
                         }
                     }
                     @Override
-                    public void onNothingSelected(AdapterView<?> parent) {  
+                    public void onNothingSelected(AdapterView<?> parent) {
                     }
                 });
               //  btnMarkAttendance.setClickable(true);

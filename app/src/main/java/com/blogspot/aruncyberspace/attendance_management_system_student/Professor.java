@@ -4,7 +4,7 @@
 package com.blogspot.aruncyberspace.attendance_management_system_student;
 
 /**
- * @author Arun
+ * @author
  *
  */
 import java.util.Collection;

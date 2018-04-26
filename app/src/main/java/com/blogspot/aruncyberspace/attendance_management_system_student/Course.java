@@ -4,7 +4,7 @@ import org.simpleframework.xml.Element;
 import org.simpleframework.xml.Root;
 
 /**
- * Created by Arun on 4/10/2015.
+ * Created by  on 4/10/2015.
  */
 @Root
 public class Course {

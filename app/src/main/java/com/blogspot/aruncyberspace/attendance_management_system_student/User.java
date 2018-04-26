@@ -1,7 +1,7 @@
 package com.blogspot.aruncyberspace.attendance_management_system_student;
 
 /**
- * Created by Arun on 3/23/2015.
+ * Created by  on 3/23/2015.
  */
 import org.simpleframework.xml.*;
 

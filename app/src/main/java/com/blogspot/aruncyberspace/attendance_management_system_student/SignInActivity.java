@@ -62,8 +62,7 @@ public class SignInActivity extends ActionBarActivity {
     private final String NAMESPACE = "http://aruncyberspace.blogspot.in";
     //private final String URL = "http://192.168.0.5/AMS/AttendanceMgmtSystemBackEndService.svc";
     private String URLFORMAT = "http://%s/AMSWebServices/AMSService/Authenticate/";
-    private String URL = "http://192.168.0.13:9999/AMSService/Authenticate/";
-    private final String SOAP_ACTION = "http://aruncyberspace.blogspot.in/IAttendanceMgmtSystemBackEndService/isAuthenticatedUser";
+    private String URL = "http://qrapp-qrattendfirst.7e14.starter-us-west-2.openshiftapps.com/AMSWebServices/AMSService/Authenticate/";
     private final String METHOD_NAME = "isAuthenticatedUser";
     String userName;
     String password;
@@ -132,23 +131,6 @@ public class SignInActivity extends ActionBarActivity {
                 AsyncCallWS task = new AsyncCallWS();
                 //Call execute
                 task.execute();
-/*
-                        // mProgressView.setVisibility(View.GONE);
-                    } else {
-                     //   mProgressView.setVisibility(View.GONE);
-                      //  mErrorMessageView.setText("Please enter Password");
-                        Toast toast = Toast.makeText(getApplicationContext(),R.string.enter_password, Toast.LENGTH_LONG);
-                        toast.show();
-                    }
-                }//If text control is empty
-
-                else
-
-                {
-                   // mErrorMessageView.setText("Please enter Mav Email ID");
-                    Toast toast = Toast.makeText(getApplicationContext(),R.string.enter_email, Toast.LENGTH_LONG);
-                    toast.show();
-                }*/
             }
         });
 
@@ -188,7 +170,6 @@ public class SignInActivity extends ActionBarActivity {
         String result = "";
         DefaultHttpClient httpclient = new DefaultHttpClient();
         try {
-
             //  String url = "http://192.168.0.6:8080/AMSWebServices/AMSService/Authenticate/"+userName+"/"+password;
             String url = URL + userName + "/" + password;
             HttpGet getRequest = new HttpGet(url);
@@ -197,74 +178,63 @@ public class SignInActivity extends ActionBarActivity {
 
             HttpEntity entity = httpResponse.getEntity();
             Log.w("AMS-S", httpResponse.getStatusLine().toString());
-
-            if (entity != null) {
-                result = EntityUtils.toString(entity);
-                Log.w("AMS-S", "Entity : " + result);
-            }
-
+//            if(httpResponse.getStatusLine().toString().equals("HTTP/1.1 200 OK")) {
+                if (entity != null) {
+                    result = EntityUtils.toString(entity);
+                    Log.w("AMS-S", "Entity : " + result);
+                }
+//            }
+//            else{
+//                Toast.makeText(getApplicationContext(),"Connection Error",Toast.LENGTH_SHORT).show();
+//            }
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            // When HttpClient instance is no longer needed,
-            // shut down the connection manager to ensure
-            // immediate deallocation of all system resources
             httpclient.getConnectionManager().shutdown();
         }
 
         return result;
     }
-
-
     private class AsyncCallWS extends AsyncTask<String, Void, Void> {
         @Override
         protected Void doInBackground(String... params) {
             Log.i(TAG, "doInBackground");
-
             if (validated) {
                 String response = getAuthenticatedUser(userName, password);
                 userXML = response;
-
             }
-
             return null;
         }
 
         @Override
         protected void onPostExecute(Void result) {
             Log.i(TAG, "onPostExecute");
-
             mProgressView.setVisibility(View.GONE);
             Serializer serializer = new Persister();
-            try {
-                user = new User();
-                user = serializer.read(User.class, userXML);
-                String name = user.getFirstName();
+            if(!userXML.equals("")) {
+                try {
+                    user = new User();
+                    user = serializer.read(User.class, userXML);
+                    String name = user.getFirstName();
+                } catch (Exception ex) {
+                    String exceptionstring = ex.toString();
+                    Log.i(TAG, "Async task error: " + exceptionstring);
+                    exceptionstring.toString();
+                }
 
-            } catch (Exception ex) {
-                String exceptionstring = ex.toString();
-                Log.i(TAG, "Async task error: " + exceptionstring);
-                exceptionstring.toString();
+                if (user != null && user.getFirstName() != null) {
+                    Intent intent = new Intent(getApplicationContext(), StudentMainActivity.class);
+                    intent.putExtra("USER_XML", userXML);
+                    startActivity(intent);
+                } else {
+                    Context context = getApplicationContext();
+                    CharSequence text = "Invalid User Name or Password!";
+                    int duration = Toast.LENGTH_SHORT;
+                    Toast toast = Toast.makeText(context, text, duration);
+                    toast.show();
+                }
             }
-
-            if (user != null && user.getFirstName() != null) {
-
-                Intent intent = new Intent(getApplicationContext(), StudentMainActivity.class);
-                intent.putExtra("USER_XML", userXML);
-                startActivity(intent);
-            } else {
-
-                // mErrorMessageView.setText("Invalid User Name or Password!");
-
-                Context context = getApplicationContext();
-                CharSequence text = "Invalid User Name or Password!";
-                int duration = Toast.LENGTH_SHORT;
-
-                Toast toast = Toast.makeText(context, text, duration);
-
-                toast.show();
-
-            }
+            else Toast.makeText(getApplicationContext(),"Connection Error",Toast.LENGTH_SHORT).show();
         }
 
 
@@ -290,7 +260,7 @@ public class SignInActivity extends ActionBarActivity {
             else
 
             {
-                // mErrorMessageView.setText("Please enter Mav Email ID");
+                // mErrorMessageView.setText("Please enter  Email ID");
                 Toast toast = Toast.makeText(getApplicationContext(), R.string.enter_email, Toast.LENGTH_LONG);
                 toast.show();
                 validated = false;

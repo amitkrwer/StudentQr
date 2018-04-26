@@ -40,7 +40,7 @@ public class SignUpActivity extends ActionBarActivity {
     String response;
     String address="0";
     //  private String URLFORMAT = "http://%s/DistributedMeetingSchedulerWebService/DMSWebService/Register/";
-    private String URL = "http://192.168.0.13:9999/AMSService/Register/";
+    private String URL = "http://qrapp-qrattendfirst.7e14.starter-us-west-2.openshiftapps.com/AMSWebServices/AMSService/Register/";
 
 
     @Override

@@ -58,7 +58,6 @@ public class QRCodeGenerateActivity extends ActionBarActivity {
         courseId = getIntent().getStringExtra("course_id");
         user = deserializeUserXML(userXML);
         timeStamp = (new Timestamp(date.getTime())).toString();
-
         mProgressView = (ProgressBar) findViewById(R.id.login_progress);
         mQRCodeImageView = (ImageView) findViewById(R.id.qrCodeImage);
         //setting empty transparent background

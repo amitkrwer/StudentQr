@@ -34,7 +34,8 @@
 
                 <TextView android:text="Course:" android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
 
-                <Spinner android:id="@+id/courseSelector" />
+                <Spinner android:id="@+id/courseSelector"
+                    android:layout_gravity="left"/>
             </TableRow>
 
         </TableLayout>
